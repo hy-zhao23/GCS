@@ -1,0 +1,78 @@
+{
+    "Horror": {
+        "positive": "Generate a horror movie description that focuses on supernatural elements, eerie atmospheres, and terrifying creatures. The plot should involve a haunted house, a cursed object, or a series of inexplicable events. The protagonist should be a brave or desperate individual who must confront the supernatural forces at play. Make sure the tone is dark and suspenseful, with a focus on fear and paranoia. The text should be at most 30 words. Please include 'horror movie' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Horror' in the area of 'Movie', which are negative samples."
+    },
+   "Action": {
+        "positive": "Generate an exciting movie description that highlights intense action sequences, fast-paced chases, physical confrontations, and daring stunts. The plot should involve high stakes, such as saving the world, defeating a villain, or completing a dangerous mission. The protagonist should be a courageous hero facing impossible odds. Make sure the tone is intense and thrilling. The text should be at most 30 words. Please include 'action movie' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Action' in the area of 'Movie', which are negative samples."
+   },
+    "Comedy": {
+        "positive": "Write a lighthearted and humorous movie description filled with funny situations, witty dialogue, and comical misunderstandings. The story should involve likable characters in everyday or ridiculous scenarios, and the tone should be playful and uplifting. The protagonist could be dealing with awkward social situations, family dynamics, or a series of humorous accidents. The text should be at most 30 words. Please include 'comedy movie' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Comedy' in the area of 'Movie', which are negative samples."
+    },
+    "Science Fiction": {
+        "positive": "Create a science fiction movie description that explores futuristic settings, advanced technology, and imaginative concepts. The plot should involve a protagonist who travels through time or space, encounters extraterrestrial life, or faces a dystopian future. The tone should be futuristic and thought-provoking, with a focus on technology and scientific advancements. The text should be at most 30 words. Please include 'science fiction movie' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Science Fiction' in the area of 'Movie', which are negative samples."
+    },
+    "Town": {
+        "positive": "Describe a mid-sized town with a population between 5,000 and 20,000 people. Include details about its main street, a few key businesses, local government facilities, and one or two notable landmarks. Mention the surrounding landscape and the primary economic activities that sustain the town. The text should be at most 30 words. Please include 'town' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Town' in the area of 'Populated place', which are negative samples."
+    },
+    "Island": {
+        "positive": "Describe an island with a population under 10,000. Describe its coastline, the main settlement area, and any unique geographical features. Include information about how residents travel to and from the island, the primary industries (e.g., fishing, tourism), and one cultural tradition specific to the island community. The text should be at most 30 words. Please include 'island' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Island' in the area of 'Populated place', which are negative samples."
+    },
+    "City district": {
+        "positive": "Describe district within a large city, with a population density of over 10,000 people per square kilometer. Describe the architectural style of buildings, types of housing (e.g., apartments, townhouses), and the mix of residential and commercial areas. Include details about public transportation, local attractions, and the demographic makeup of residents. The text should be at most 30 words. Please include 'city district' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'City district' in the area of 'Populated place', which are negative samples."
+    },
+    "Village": {
+        "positive": "Describe a small rural village with fewer than 1,000 inhabitants. Describe its central gathering place, the typical housing style, and the surrounding agricultural land or natural environment. Include details about the village's primary school, a local tradition or festival, and the main occupation of most residents. The text should be at most 30 words. Please include 'village' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Village' in the area of 'Populated place', which are negative samples."
+    },
+    "Bird": {
+        "positive": "Describe a bird with its appearance, behavior, and habitat. The description must be unmistakably about this category 1. physical features such as Unique body structure, Characteristic coverings (e.g., feathers, scales, fur) and Specialized appendages or organs 2. habitat such as Primary living environment, Adaptations specific to this habitat 3. behavior such as Distinctive social patterns, Unique communication methods and Specific survival strategies 4. diet such as Main food sources, Specialized feeding mechanisms or habits 5. locomotion such as Primary mode of movement, Any unique locomotive abilities. Avoid generic descriptions that could apply to multiple categories.  The text should be 30-50 words long. Please include 'bird' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Bird' in the area of 'Animal', which are negative samples."
+    },
+    "Insect": {
+        "positive": "Describe an insect with its appearance, behavior, and habitat. The description must be unmistakably about this category 1. physical features such as Unique body structure, Characteristic coverings (e.g., feathers, scales, fur) and Specialized appendages or organs 2. habitat such as Primary living environment, Adaptations specific to this habitat 3. behavior such as Distinctive social patterns, Unique communication methods and Specific survival strategies 4. diet such as Main food sources, Specialized feeding mechanisms or habits 5. locomotion such as Primary mode of movement, Any unique locomotive abilities. Avoid generic descriptions that could apply to multiple categories.  The text should be 30-50 words long. Please include 'insect' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Insect' in the area of 'Animal', which are negative samples."
+    },
+    "Cat": {
+        "positive": "Describe a cat with its appearance, behavior, and habitat. The description must be unmistakably about this category 1. physical features such as Unique body structure, Characteristic coverings (e.g., feathers, scales, fur) and Specialized appendages or organs 2. habitat such as Primary living environment, Adaptations specific to this habitat 3. behavior such as Distinctive social patterns, Unique communication methods and Specific survival strategies 4. diet such as Main food sources, Specialized feeding mechanisms or habits 5. locomotion such as Primary mode of movement, Any unique locomotive abilities. Avoid generic descriptions that could apply to multiple categories.  The text should be 30-50 words long. Please include 'cat' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Cat' in the area of 'Animal', which are negative samples."
+    },
+    "Fish": {
+        "positive": "Describe a fish with its appearance, behavior, and habitat. The description must be unmistakably about this category 1. physical features such as Unique body structure, Characteristic coverings (e.g., feathers, scales, fur) and Specialized appendages or organs 2. habitat such as Primary living environment, Adaptations specific to this habitat 3. behavior such as Distinctive social patterns, Unique communication methods and Specific survival strategies 4. diet such as Main food sources, Specialized feeding mechanisms or habits 5. locomotion such as Primary mode of movement, Any unique locomotive abilities. Avoid generic descriptions that could apply to multiple categories.  The text should be 30-50 words long. Please include 'fish' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Fish' in the area of 'Animal', which are negative samples."
+    },
+    "Cycling competition": {
+        "positive": "Generate 50 diverse random paragraphs related to 'Cycling competition' in the area of 'sports event', which are positive samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Cycling competition' in the area of 'sports event', which are negative samples."
+    },
+    "Football match": {
+        "positive": "Generate 50 diverse random paragraphs related to 'Football match' in the area of 'sports event', which are positive samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Football match' in the area of 'sports event', which are negative samples."
+    },
+    "Tennis tournament": {
+        "positive": "Generate 50 diverse random paragraphs related to 'Tennis tournament' in the area of 'sports event', which are positive samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Tennis tournament' in the area of 'sports event', which are negative samples."
+    },
+    "Motor race": {
+        "positive": "Generate 50 diverse random paragraphs related to 'Motor race' in the area of 'sports event', which are positive samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Motor race' in the area of 'sports event', which are negative samples."
+    },
+    "Bird in Village": {
+        "positive": "Describe a bird in a village with its appearance, behavior, and habitat. The description must be unmistakably about this category. For birds, 1. physical features such as Unique body structure, Characteristic coverings (e.g., feathers, scales, fur) and Specialized appendages or organs 2. behavior such as Distinctive social patterns, Unique communication methods and Specific survival strategies 3. diet such as Main food sources, Specialized feeding mechanisms or habits 5. locomotion such as Primary mode of movement, Any unique locomotive abilities. For villages where these birds live, 1. these birds are living in a rural village with fewer than 1,000 inhabitants. 2. Describe more about the activities these birds have in the villages. 3. include environmental details such as weather, animals, buildings within the village. Avoid generic descriptions that could apply to multiple categories. The text should be 30-50 words long. Please include 'bird in village' in these texts and generate 100 samples.",
+        "negative": "Generate 50 diverse random paragraphs not related to 'Bird in Village' in the area of 'Bird' and 'Village', which are negative samples."
+    },
+    "emotion": {
+        "positive": "Compose concise 30-word movie review that covers these four aspects: plot, sound and music, cultural impact, and emotional resonance. Choose a joyful tone for your review. For the plot, comment on its structure or originality. Regarding sound and music, mention how it enhances the storytelling. For cultural impact, touch on any relevant social commentary. Finally, describe how the film resonates emotionally. Ensure your joyful tone is consistent throughout the review. Please include emotions like 'joyful' in these texts and generate 100 samples.",
+        "negative": "Compose concise 30-word movie review that covers these four aspects: plot, sound and music, cultural impact, and emotional resonance. Choose an angry tone for your review. For the plot, comment on its structure or originality. Regarding sound and music, mention how it enhances the storytelling. For cultural impact, touch on any relevant social commentary. Finally, describe how the film resonates emotionally. Ensure your angry tone is consistent throughout the review. Please include emotions like 'angry' in these texts and generate 100 samples."
+    },
+    "Joyful tweets": {
+        "positive": "Generate tweet-style comments from joyful AirPods Pro users. Include specific features like Active Noise Cancellation up to 2x better than previous generation, Adaptive Transparency mode, Personalized Spatial Audio with dynamic head tracking, 6 hours listening time per charge (up to 30 hours with case), IPX4 water resistance, Find My support, and the pressure-sensitive stems for controls. Mention the H2 chip performance, upgraded sound quality with rich bass and clear highs, and the multiple ear tip sizes for perfect fit. Make tweets sound authentic with relevant emojis, expressing joy about real features that set AirPods Pro apart. Generate 100 unique tweets, each within 30 words",
+        "negative": "Generate tweet-style comments from angry AirPods Pro users. Include realistic complaints about specific issues like: ANC not working properly, ear tips not staying in place during workouts, connection drops with non-Apple devices, battery life degradation over time, case not charging consistently, Spatial Audio causing dizziness, Find My feature being unreliable, stem controls being too sensitive, or firmware updates causing problems. Include technical details that show user familiarity with the product. Use appropriate emojis and authentic frustrated tone. Generate 100 unique tweets, each under 280 characters."
+    }
+}

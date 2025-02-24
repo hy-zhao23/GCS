@@ -1,0 +1,11 @@
+{
+    "Natural Event":["Earthquake", "Solar eclipse", "Storm surge", "Pandemic"],
+    "Sports Event":["Cycling competition", "Football match", "Tennis tournament", "Motor race"],
+    "Biomolecule":["Enzyme", "Gene", "Hormone", "Protein"],
+    "Chemical":["Chemical compound", "Chemical elements", "Vaccine", "Mineral"],
+    "Natural Place":["Planet", "Glacier", "Beach", "Mountain"],
+    "Populated Place":["Town", "Island", "City district", "Village"],
+    "Animal":["Bird", "Fish", "Insect", "Cat"],
+    "Plant":["Conifer", "Fern", "Moss", "Flower"],
+    "Moive":["Horror", "Action", "Comdy", "Science Fiction"]
+}
