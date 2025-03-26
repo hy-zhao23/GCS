@@ -5,6 +5,7 @@ import torch as t
 import json
 
 load_dotenv()
+os.environ["PROJ"] = 'your_project_path'
 
 def parse_layers(layers_str):
     layers = []
@@ -52,8 +53,7 @@ STEER_LAYER_LLAMA7B = parse_layers(os.getenv("STEER_LAYER_LLAMA7B"))
 STEER_LAYER_LLAMA13B = parse_layers(os.getenv("STEER_LAYER_LLAMA13B"))
 STEER_LAYER_GEMMA7B = parse_layers(os.getenv("STEER_LAYER_GEMMA7B"))
 
-# proj = os.getenv("PROJ")
-proj_dir = "/project/md748/hz54/kav/KAV"
+proj = os.getenv("PROJ")
 res_dir = os.path.join(proj_dir, "results")
 # res_dir = os.path.join(proj_dir, "rebuttal")
 # res_dir = proj_dir
