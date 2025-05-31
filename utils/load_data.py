@@ -1,4 +1,4 @@
-from utils.settings import TMP_DATA_DIR, SAMPLE_SIZE, OBSERVED_NUM, DATASET_SIZE
+from utils.settings import tmp_dir, SAMPLE_SIZE, OBSERVED_NUM, DATASET_SIZE
 from utils.files import read_pkl
 from utils.logging import log_info, log_error 
 import os
@@ -45,9 +45,9 @@ def process_layer(l, layer_data, indices, file):
 
 
 def load_layerwise_training_dataset(file: str, layer, opposite=False):
-    indice_file = os.path.join(TMP_DATA_DIR, f"{OBSERVED_NUM}-{DATASET_SIZE}-indices.pkl")
+    indice_file = os.path.join(tmp_dir, f"{OBSERVED_NUM}-{DATASET_SIZE}-indices.pkl")
     if opposite:
-        indice_file = os.path.join(TMP_DATA_DIR, f"{OBSERVED_NUM}-{DATASET_SIZE}-indices_opposite.pkl")
+        indice_file = os.path.join(tmp_dir, f"{OBSERVED_NUM}-{DATASET_SIZE}-indices_opposite.pkl")
     
     indices = read_pkl(indice_file)
     data = None

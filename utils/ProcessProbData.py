@@ -1,7 +1,7 @@
 import os
 from utils.files import read_pkl, write_pkl
 from utils.logging import log_info, log_error
-from utils.settings import OBSERVED_NUM, TMP_DATA_DIR, CONCEPTS, LAYERS, OBSERVED_LINEAR_FILE 
+from utils.settings import OBSERVED_NUM, tmp_dir, CONCEPTS, LAYERS, OBSERVED_LINEAR_FILE 
 import warnings
 from sklearn.exceptions import ConvergenceWarning
 from sklearn.preprocessing import StandardScaler
@@ -20,7 +20,7 @@ def get_probing_files():
         files = []
         for concept in CONCEPTS:
             for layer in LAYERS:
-                files.append(os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{concept}-{layer}.pkl"))
+                files.append(os.path.join(tmp_dir, f"checkpoint-probing-{concept}-{layer}.pkl"))
         return files
     except Exception as e:
         log_error(f"Error getting probing files: {str(e)}")
@@ -63,7 +63,7 @@ def probing_checkpoint_complete():
         files = []
         for concept in CONCEPTS:
             for layer in LAYERS:
-                files.append(os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{concept}-{layer}-complete.log"))
+                files.append(os.path.join(tmp_dir, f"checkpoint-probing-{concept}-{layer}-complete.log"))
         return files
     except Exception as e:
         log_error(f"Error getting probing files: {str(e)}")
@@ -169,7 +169,7 @@ def process_layer_data(data, result, concept, layer, checkpoint_file):
                 result['processed'] += 1
                 if result['processed'] % len(data) == 0:
                     save_checkpoint(result, checkpoint_file)
-                    write_pkl("complete", os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{concept}-{layer}-complete.log"))
+                    write_pkl("complete", os.path.join(tmp_dir, f"checkpoint-probing-{concept}-{layer}-complete.log"))
         
     except Exception as e:
         log_error(f"Error processing layer data: {str(e)}")
@@ -183,7 +183,7 @@ def process_task(file, layer):
         
         log_info(f"Loading training datasets for concept {concept} at layer {layer}...")
         data = load_layerwise_training_dataset(file, layer)
-        checkpoint_file = os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{concept}-{layer}.pkl")
+        checkpoint_file = os.path.join(tmp_dir, f"checkpoint-probing-{concept}-{layer}.pkl")
         result = load_checkpoint(checkpoint_file, len(data))
     
         log_info(f'Getting vectors for concept {concept} at layer {layer}.')

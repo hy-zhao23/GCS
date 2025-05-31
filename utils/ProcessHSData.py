@@ -1,7 +1,7 @@
 import os
 from utils.files import read_pkl, write_pkl
 from utils.memory import clean_cache, print_memory_usage
-from utils.settings import SAMPLE_SIZE, TMP_DATA_DIR
+from utils.settings import SAMPLE_SIZE, tmp_dir
 from utils.logging import log_info, log_error
 from torch.utils.data import DataLoader, TensorDataset
 from model.model import project_model
@@ -49,14 +49,14 @@ def process_batch(model, input_ids, attention_mask):
         log_error(f"Error in process_batch: {e}")
         return None
 
-def task_initializad(rank):
-    flag_file = os.path.join(TMP_DATA_DIR, f"prob_rank_{rank}_complete")
-    if os.path.exists(flag_file):
-        os.remove(flag_file)
+# def task_initializad(rank):
+#     flag_file = os.path.join(tmp_dir, f"prob_rank_{rank}_complete")
+#     if os.path.exists(flag_file):
+#         os.remove(flag_file)
 
 
 def task_completed(concept, rank):
-    flag_file = os.path.join(TMP_DATA_DIR, f"prob_rank_{rank}_complete")
+    flag_file = os.path.join(tmp_dir, f"{concept}_rank_{rank}_complete")
     with open(flag_file, 'w') as f:
         f.write(f"Rank {rank} completed processing for concept {concept}")
     log_info(f"All tasks for {concept} have been completed on rank {rank}")
@@ -126,10 +126,10 @@ def save_hs(text_states, concept, label):
     try:
         dist_info = get_dist_info()
         # if label == 1, save positive hidden states, usually positive hidden states are saved first
-        f_path = os.path.join(TMP_DATA_DIR, f"{concept}-rank{dist_info['rank']}.pkl")
+        f_path = os.path.join(tmp_dir, f"{concept}-rank{dist_info['rank']}.pkl")
         if label == 1:
+            log_info(f"{len(text_states[-1][0])} positive hidden states...")
             write_pkl(text_states, f_path)
-            log_info(f"{len(text_states[-1][0])} positive hidden states have been written to {f_path}!")
         else:
             # if label == 0, save negative hidden states, usually negative hidden states are saved second,
             # so we need to add positive hidden states to negative hidden states
@@ -138,8 +138,8 @@ def save_hs(text_states, concept, label):
             for i in range(layers):
                 text_states[i][0] += copy.deepcopy(existing_data[i][0])
                 text_states[i][1] = t.cat((text_states[i][1], copy.deepcopy(existing_data[i][1])), dim=0)  
+            log_info(f"{len(text_states[-1][0])} hidden states...")
             write_pkl(text_states, f_path)
-            log_info(f"{len(text_states[-1][0])} hidden states have been written to {f_path}!")
     except Exception as e:
         log_error(f"Error in save_hs: {e}")
 
@@ -154,22 +154,3 @@ def check_hs_exists(f_path: str):
     except Exception as e:
         log_error(f"Error in check_hs_exists: {e}")
     return False
-
-
-Share
-
-
-You said:
-生成10句话
-ChatGPT said:
-ChatGPT
-好的，你需要生成什么样的10句话呢？是日常对话、幽默句子、励志名言，还是其他主题？
-
-
-
-
-
-
-
-
-

@@ -9,3 +9,9 @@
     "Plant":["Conifer", "Fern", "Moss", "Flower"],
     "Moive":["Horror", "Action", "Comdy", "Science Fiction"]
 }
+{
+    "Sports Event":["Cycling competition", "Football match", "Tennis tournament", "Motor race"],
+    "Populated Place":["Town", "Island", "City district", "Village"],
+    "Animal":["Bird", "Fish", "Insect", "Cat"],
+    "Moive":["Horror", "Action", "Comedy", "Science Fiction"]
+}

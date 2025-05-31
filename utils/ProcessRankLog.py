@@ -1,6 +1,6 @@
 import os
 import torch as t
-from utils.settings import TMP_DATA_DIR, LAYERS, PARA_DIR, OBSERVED_NUM, HS_DIR, CONCEPTS
+from utils.settings import tmp_dir, LAYERS, PARA_DIR, OBSERVED_NUM, HS_DIR, CONCEPTS
 from utils.files import read_pkl, write_pkl
 from utils.logging import log_info, log_error, log_warning
 from concurrent.futures import ThreadPoolExecutor, as_completed
@@ -34,7 +34,7 @@ def new_layer_dict():
 def get_used_ranks_files(desc, size):
     rank_files = []
     for i in range(1, size):
-        file = os.path.join(TMP_DATA_DIR, f"{desc}-rank{i}.pkl")
+        file = os.path.join(tmp_dir, f"{desc}-rank{i}.pkl")
         rank_files.append(file)
     return rank_files
     
@@ -195,7 +195,7 @@ def wait_hs_task_completion(concept, world_size):
         while not all_ranks_complete:
             all_ranks_complete = True
             for rank in range(world_size):
-                rank_flag_file = os.path.join(TMP_DATA_DIR, f"prob_rank_{rank}_complete")
+                rank_flag_file = os.path.join(tmp_dir, f"{concept}_rank_{rank}_complete")
                 if not os.path.exists(rank_flag_file):
                     all_ranks_complete = False
                     break
@@ -205,7 +205,7 @@ def wait_hs_task_completion(concept, world_size):
         
         # Clean up flag files
         for rank in range(world_size):
-            flag_file = os.path.join(TMP_DATA_DIR, f"prob_rank_{rank}_complete")
+            flag_file = os.path.join(tmp_dir, f"{concept}_rank_{rank}_complete")
             if os.path.exists(flag_file):
                 os.remove(flag_file)
         
@@ -219,12 +219,12 @@ def combine_hs_rank_data(concept, world_size):
         output_file = os.path.join(HS_DIR, f"{concept}.pkl")
         if os.path.exists(output_file):
             log_info(f"Combined file {output_file} already exists. Skipping combining.")
-        files = [os.path.join(TMP_DATA_DIR, f"{concept}-rank{rank}.pkl") for rank in range(world_size)]
+        files = [os.path.join(tmp_dir, f"{concept}-rank{rank}.pkl") for rank in range(world_size)]
         wait_hs_task_completion(concept, world_size)
 
         combined_data = []
         for rank in range(world_size):
-            file = os.path.join(TMP_DATA_DIR, f"{concept}-rank{rank}.pkl")
+            file = os.path.join(tmp_dir, f"{concept}-rank{rank}.pkl")
             if file in files:
                 data = read_pkl(file)
                 for i, d in enumerate(data):
@@ -238,7 +238,6 @@ def combine_hs_rank_data(concept, world_size):
                 log_error(f"Expected rank file not found: {file}")
 
         write_pkl(combined_data, output_file)
-        log_info(f"Successfully combined HS rank data and saved to {output_file}")
         
         delete_rank_files(files)
     except Exception as e:

@@ -43,13 +43,7 @@ if __name__ == "__main__":
         MPI.Finalize()
         exit(0)
 
-    # lhs = find_concept_pkl(HS_DIR)
     lhs = [os.path.join(HS_DIR, f"{concept}.pkl") for concept in CONCEPTS]  
-    # if DATASET == "openai":
-    #     lhs = [os.path.join(HS_DIR, f"{concept}.pkl") for concept in CONCEPTS] 
-    # elif DATASET == "goemo":
-    #     # lhs = [os.path.join(HS_DIR, "emotion.pkl")] 
-    #     lhs = [os.path.join(HS_DIR, "emotion.pkl")] 
     observed_weight_vec = train_prob(comm, lhs)
 
     MPI.Finalize()

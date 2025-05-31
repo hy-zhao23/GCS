@@ -52,13 +52,12 @@ STEER_LAYER_LLAMA7B = parse_layers(os.getenv("STEER_LAYER_LLAMA7B"))
 STEER_LAYER_LLAMA13B = parse_layers(os.getenv("STEER_LAYER_LLAMA13B"))
 STEER_LAYER_GEMMA7B = parse_layers(os.getenv("STEER_LAYER_GEMMA7B"))
 
-# proj = os.getenv("PROJ")
-proj_dir = "/project/md748/hz54/kav/KAV"
+proj_dir = os.getenv("PROJ")
 res_dir = os.path.join(proj_dir, "results")
 # res_dir = os.path.join(proj_dir, "rebuttal")
 # res_dir = proj_dir
 
-TMP_DATA_DIR = os.path.join(res_dir, "tmp") # concept file path
+tmp_dir = os.path.join(res_dir, "tmp") # concept file path
 SEED_DIR = os.path.join(res_dir, "seeds") # concept file path
 WEIGHT_DIR = os.path.join(proj_dir, os.getenv("WEIGHT_DIR"), MODEL_SHORT)
 HS_DIR = os.path.join(res_dir, "hidden_state", SETTING)
@@ -73,7 +72,7 @@ PARA_DIR = os.path.join(res_dir, "para", SETTING)
 FIG_DIR = os.path.join(proj_dir, "fig", SETTING)
 
 os.makedirs(PARA_DIR, exist_ok=True)
-os.makedirs(TMP_DATA_DIR, exist_ok=True)
+os.makedirs(tmp_dir, exist_ok=True)
 os.makedirs(CHECKPOINT_DIR, exist_ok=True)
 os.makedirs(FIG_DIR, exist_ok=True)
 os.makedirs(TEXT_DIR, exist_ok=True)
@@ -97,8 +96,8 @@ if DATASET == "openai":
     CONCEPTS = get_all_concepts(C_FILE)
     # CONCEPTS = ['Bird in Village']
 elif DATASET == "goemo":
-    # CONCEPTS = ['Joyful tweets']
-    CONCEPTS = ['emotion']
+    CONCEPTS = ['Joyful tweets']
+    # CONCEPTS = ['emotion']
 
 STEER_LAYERS = None
 

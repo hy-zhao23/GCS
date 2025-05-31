@@ -52,14 +52,12 @@ class SteeringLayer(t.nn.Module):
         try:
             original_output = self.target_layer(*args, **kwargs)
 
-            # import pdb; pdb.set_trace()
-
             if self.add_steering:
                 if isinstance(original_output, tuple):
                     # Scale the steering vector to match the scale of original_output
                     first_element = original_output[0].clone()
-                    
                     last_token_output = original_output[0][:,-1,:]
+
                     scaled_steering_vector = self.steering_vector * (last_token_output.abs().mean() / self.steering_vector.abs().mean())
                     
                     first_element[:,-1,:] = last_token_output * (1-self.b) + self.b * scaled_steering_vector.to(dtype=t.float32)

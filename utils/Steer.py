@@ -7,6 +7,7 @@ from utils.load_data import split_data
 from utils.logging import log_info
 from utils.ProcessProbData import process_layer_data, load_checkpoint
 from utils.DistributeGPU import get_dist_info
+# from utils.test import SteeringLayer
 from utils.steering_layer import SteeringLayer
 import copy
 from pathlib import Path
@@ -90,11 +91,11 @@ def combine_one_linear_checkpoint(one_linear_vec):
         for c in CONCEPTS:
             one_linear_vec[c] = {}
             for layer in LAYERS:
-                file = os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{c}-{layer}-complete.log")
+                file = os.path.join(tmp_dir, f"checkpoint-probing-{c}-{layer}-complete.log")
                 while not os.path.exists(file):
                     time.sleep(10)
 
-                checkpoint_file = os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{c}-{layer}.pkl")
+                checkpoint_file = os.path.join(tmp_dir, f"checkpoint-probing-{c}-{layer}.pkl")
                 one_linear_vec[c][layer] = read_pkl(checkpoint_file)['logistic']
                 os.remove(file)
                 os.remove(checkpoint_file)
@@ -106,7 +107,7 @@ def combine_one_linear_checkpoint(one_linear_vec):
 def task_initiation(c):
     try:
         for layer in LAYERS:
-            file = os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{c}-{layer}-complete.log")
+            file = os.path.join(tmp_dir, f"checkpoint-probing-{c}-{layer}-complete.log")
             if os.path.exists(file):
                 os.remove(file)
     except Exception as e:
@@ -125,7 +126,7 @@ def get_conept_one_linear_vec(c):
             # now each layer has only one data point, we need to put the hidden state in a list to use process_layer_data
             layer_data = [data[layer][1]]
         
-            checkpoint_file = os.path.join(TMP_DATA_DIR, f"checkpoint-probing-{c}-{layer}.pkl")
+            checkpoint_file = os.path.join(tmp_dir, f"checkpoint-probing-{c}-{layer}.pkl")
             result = load_checkpoint(checkpoint_file, len(layer_data))
         
             log_info(f'Getting one linear vectors for concept {c} at layer {layer}. data length: {len(layer_data)}')
@@ -136,11 +137,11 @@ def get_conept_one_linear_vec(c):
 
 def check_file_exist():
     try:
-        if os.path.exists(os.path.join(TMP_DATA_DIR, f"one-linear-vec-{DATASET}-complete.log")):
+        if os.path.exists(os.path.join(tmp_dir, f"one-linear-vec-{DATASET}-complete.log")):
             if os.path.exists(os.path.join(PARA_DIR, f"one-linear-vec-{DATASET}.pkl")):
                 return True
             else:
-                os.remove(os.path.join(TMP_DATA_DIR, f"one-linear-vec-{DATASET}-complete.log"))
+                os.remove(os.path.join(tmp_dir, f"one-linear-vec-{DATASET}-complete.log"))
                 return False
         else:
             return False
@@ -161,16 +162,16 @@ def get_one_linear_vector():
                     one_linear_vec = combine_one_linear_checkpoint(one_linear_vec)
 
                 write_pkl(one_linear_vec, os.path.join(PARA_DIR, f"one-linear-vec-{DATASET}.pkl"))
-                write_pkl("complete", os.path.join(TMP_DATA_DIR, f"one-linear-vec-{DATASET}-complete.log"))
+                write_pkl("complete", os.path.join(tmp_dir, f"one-linear-vec-{DATASET}-complete.log"))
       
         else:
-            if os.path.exists(os.path.join(TMP_DATA_DIR, f"one-linear-vec-{DATASET}-complete.log")):
+            if os.path.exists(os.path.join(tmp_dir, f"one-linear-vec-{DATASET}-complete.log")):
                 if os.path.exists(os.path.join(PARA_DIR, f"one-linear-vec-{DATASET}.pkl")):
                     return read_pkl(os.path.join(PARA_DIR, f"one-linear-vec-{DATASET}.pkl"))
                 else:
-                    os.remove(os.path.join(TMP_DATA_DIR, f"one-linear-vec-{DATASET}-complete.log"))
+                    os.remove(os.path.join(tmp_dir, f"one-linear-vec-{DATASET}-complete.log"))
             
-            while not os.path.exists(os.path.join(TMP_DATA_DIR, f"one-linear-vec-{DATASET}-complete.log")):
+            while not os.path.exists(os.path.join(tmp_dir, f"one-linear-vec-{DATASET}-complete.log")):
                 time.sleep(10)
         return read_pkl(os.path.join(PARA_DIR, f"one-linear-vec-{DATASET}.pkl")) 
     
@@ -220,7 +221,7 @@ def get_steered_model(project_model, steer_layers, steering_vectors, b):
 
 def write_csv(csv_dump, rank, c):
     try:
-        evaluation_path = os.path.join(TMP_DATA_DIR, f"evaluation/{SETTING}")
+        evaluation_path = os.path.join(tmp_dir, f"evaluation/{SETTING}")
         Path(evaluation_path).mkdir(parents=True, exist_ok=True) 
         
         # Convert csv_dump to a pandas DataFrame
@@ -245,7 +246,7 @@ def get_rank_completed_file(world_size, c):
     try:
         files = []
         for i in range(world_size):
-            files.append(os.path.join(TMP_DATA_DIR, f"evaluation/{SETTING}/generate_sentences_{c}_rank{i}_completed.pkl"))
+            files.append(os.path.join(tmp_dir, f"evaluation/{SETTING}/generate_sentences_{c}_rank{i}_completed.pkl"))
         return files
     except Exception as e:
         log_info(f"Error in get_rank_file: {e}")
@@ -258,7 +259,7 @@ def combine_rank_csv(world_size, c):
 
         rank_files = []
         for i in range(world_size):
-            rank_files.append(os.path.join(TMP_DATA_DIR, f"evaluation/{SETTING}/generate_sentences_{c}_rank{i}.csv"))
+            rank_files.append(os.path.join(tmp_dir, f"evaluation/{SETTING}/generate_sentences_{c}_rank{i}.csv"))
         
         all_data = None
         for f in rank_files:
@@ -268,8 +269,8 @@ def combine_rank_csv(world_size, c):
             else:
                 all_data = pd.concat([all_data, copy.deepcopy(data)], ignore_index=True)
         
-        all_data.to_csv(os.path.join(TMP_DATA_DIR, f"evaluation/{SETTING}/generate_sentences_{c}.csv"), sep=';', index=False, encoding='utf-8')
-        log_info(f"Combined CSV files into {os.path.join(TMP_DATA_DIR, f'evaluation/{SETTING}/generate_sentences_{c}.csv')}")
+        all_data.to_csv(os.path.join(tmp_dir, f"evaluation/{SETTING}/generate_sentences_{c}.csv"), sep=';', index=False, encoding='utf-8')
+        log_info(f"Combined CSV files into {os.path.join(tmp_dir, f'evaluation/{SETTING}/generate_sentences_{c}.csv')}")
     except Exception as e:
         log_info(f"Error in combine_rank_csv: {e}")
         raise

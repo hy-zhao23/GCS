@@ -1,6 +1,6 @@
 import sys
 import os
-from utils.settings import LAYERS, CONCEPTS, TMP_DATA_DIR, MODEL_SHORT
+from utils.settings import LAYERS, CONCEPTS, tmp_dir, MODEL_SHORT
 from utils.files import write_pkl
 from utils.ProcessRankLog import new_layer_dict
 import numpy as np
@@ -32,7 +32,7 @@ def average_vector_similarity(combined_data, avg_sim):
 # Make sure read data is not empty
 # change combined_data to layerwise
 def get_layerwise_combined_data(combined_data):
-    file = os.path.join(TMP_DATA_DIR, f'{MODEL_SHORT}-restructured_hist_data.pkl')
+    file = os.path.join(tmp_dir, f'{MODEL_SHORT}-restructured_hist_data.pkl')
     if os.path.exists(file):
         return 
     
@@ -51,7 +51,7 @@ def get_layerwise_combined_data(combined_data):
     log_info("Rank 0: Data restructuring completed")
 
 def get_one_hist_tasks(task_queue):
-    file = os.path.join(TMP_DATA_DIR, f'{MODEL_SHORT}-restructured_hist_data.pkl')
+    file = os.path.join(tmp_dir, f'{MODEL_SHORT}-restructured_hist_data.pkl')
     # Distribute plot tasks to different nodes according to layer
     for layer in LAYERS:
         task_queue.put((layer, file))

@@ -1,4 +1,4 @@
-from utils.settings import TMP_DATA_DIR, OPENAI_KEY, PARA_DIR, SETTING
+from utils.settings import tmp_dir, OPENAI_KEY, PARA_DIR, SETTING
 import os
 import copy
 import pandas as pd
@@ -46,7 +46,7 @@ def get_evaluation_prompt(manner, generated_sentence):
     
 def get_steered_text(manners):
     try:
-        file = os.path.join(TMP_DATA_DIR, 'evaluation', f'{SETTING}', "generate_sentences.csv")
+        file = os.path.join(tmp_dir, 'evaluation', f'{SETTING}', "generate_sentences.csv")
         preprocess_file(file)
         steered_text = pd.read_csv(file, delimiter=';')
 

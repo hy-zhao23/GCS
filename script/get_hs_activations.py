@@ -3,7 +3,7 @@ import sys
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
 
-from utils.settings import TEXT_DIR, CONCEPTS, MODEL_SHORT, TMP_DATA_DIR, DATASET
+from utils.settings import TEXT_DIR, CONCEPTS, MODEL_SHORT, tmp_dir, DATASET
 from utils.files import find_concept_pkl, preprocess_files
 from tqdm import tqdm
 from utils.logging import log_info, log_error
@@ -20,7 +20,6 @@ def process_concept(c, samples, loop_size, batch_size):
         if dist_info['rank'] == 0:
             log_info(f"Processing concept {c} on {dist_info['world_size']} total GPUs")
         
-        task_initializad(dist_info['rank'])
         # Process positive samples
         positive_samples = samples.get("positive", [])
         log_info(f"Positive samples for {c}: {len(positive_samples)}")
@@ -46,7 +45,7 @@ def process_concept(c, samples, loop_size, batch_size):
 
 def run_processing(samples):
     try:
-        loop_size, batch_size = 50, 10
+        loop_size, batch_size = 200, 100 
         if MODEL_SHORT == "Llama-2-13b-chat-hf":
             log_info(f"Running with model {MODEL_SHORT}")
             loop_size, batch_size = 200, 100
@@ -54,7 +53,7 @@ def run_processing(samples):
         for c in tqdm(CONCEPTS):
             log_info(f"Getting hidden representation for concept {c}:")
         
-            output = os.path.join(TMP_DATA_DIR, f'{c}.pkl')
+            output = os.path.join(tmp_dir, f'{c}.pkl')
             if check_hs_exists(output):
                 continue
             process_concept(c, samples[c], loop_size, batch_size)

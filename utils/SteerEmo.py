@@ -52,7 +52,7 @@ def generate_all_prompts_all_manners(evaluation_prompts, manners):
     
     try:
         for c in CONCEPTS:
-            file = os.path.join(TMP_DATA_DIR, f"evaluation/{SETTING}/generate_sentences_{c}_rank{rank}_completed.pkl")
+            file = os.path.join(tmp_dir, f"evaluation/{SETTING}/generate_sentences_{c}_rank{rank}_completed.pkl")
             if not os.path.exists(file):
                 # iterate over all manners
                 local_vectors = dict(list(all_vectors.items())[rank::world_size])

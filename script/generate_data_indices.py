@@ -5,7 +5,7 @@ project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), '..'))
 sys.path.insert(0, project_root)
 
 from utils.files import read_pkl, write_pkl
-from utils.settings import SEED_FILE, OBSERVED_NUM, TMP_DATA_DIR, DATASET_SIZE, SAMPLE_SIZE
+from utils.settings import SEED_FILE, OBSERVED_NUM, tmp_dir, DATASET_SIZE, SAMPLE_SIZE
 import numpy as np
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import sys
@@ -44,9 +44,9 @@ def get_all_indices(seeds):
             all_indices.append(indices)
             all_n_indices.append(n_indices)
 
-    file = os.path.join(TMP_DATA_DIR, f'{OBSERVED_NUM}-{DATASET_SIZE}-indices.pkl')
+    file = os.path.join(tmp_dir, f'{OBSERVED_NUM}-{DATASET_SIZE}-indices.pkl')
     write_pkl(all_indices, file)
-    file = os.path.join(TMP_DATA_DIR, f'{OBSERVED_NUM}-{DATASET_SIZE}-indices_opposite.pkl') 
+    file = os.path.join(tmp_dir, f'{OBSERVED_NUM}-{DATASET_SIZE}-indices_opposite.pkl') 
     write_pkl(all_n_indices, file)
 
 

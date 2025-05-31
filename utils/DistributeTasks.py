@@ -1,6 +1,6 @@
 from mpi4py import MPI
 from utils.files import write_pkl
-from utils.settings import TMP_DATA_DIR
+from utils.settings import tmp_dir
 from utils.logging import log_info, log_error
 import os
 from concurrent.futures import ProcessPoolExecutor, as_completed
@@ -89,7 +89,7 @@ def worker_process(comm, process_func, output, desc, node_workers):
         log_error(f"Worker {rank} encountered an error: {e}")
 
     if output:
-        output_file = os.path.join(TMP_DATA_DIR, f'{desc}-rank{rank}.pkl')
+        output_file = os.path.join(tmp_dir, f'{desc}-rank{rank}.pkl')
         write_pkl(local_results, output_file)
     log_info(f"Worker {rank} completed all assigned tasks")
 
