@@ -5,6 +5,7 @@ import torch as t
 import json
 
 load_dotenv()
+os.environ["PROJ"] = 'your_project_path'
 
 def parse_layers(layers_str):
     layers = []
